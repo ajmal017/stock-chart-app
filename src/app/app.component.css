@@ -41,12 +41,28 @@ body {
   margin: 0px 2px 0px 2px;
   color:rgb(181, 36, 36);
 }
-
+/* form */
 .form {
   margin:0 auto;
   padding: 20px;
   padding-bottom: 0px;
 }
+#form-label-wrapper {
+  background-color:#ffffff !important;
+  font-size: 0.7em;
+
+}
+#infoMessage {
+  background:#ffac9f;
+  margin:0 auto;
+  padding:30px;
+  border: 3px solid #cecece;
+  border-radius:50% 0 50% 50%;
+  margin-top:5px;
+
+} 
+
+/* text below form */
 .max-stock-text {
   width:50%;
   margin:0 auto;
@@ -56,6 +72,11 @@ body {
 .stock-examples-list-wrapper {
   margin-top:20px;
 }
-.stock-examples-list-wrapper>ul>li:nth-of-type(1) {
+.stock-examples-list-wrapper>ul>li:nth-child(1) {
+  list-style: none;
+  color:#767676;
+  padding:10px;
+}
+.stock-examples-list-wrapper>ul>li {
   list-style: none;
 }

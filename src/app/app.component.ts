@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
 import { HomeService } from "./shared/home.service";
 
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -9,7 +9,10 @@ import "rxjs/add/operator/toPromise";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
+
+
+export class AppComponent implements AfterViewInit{
+
   constructor(
     private _homeService: HomeService,
     private _formBuilder: FormBuilder
@@ -22,22 +25,26 @@ export class AppComponent {
       ]
     });
   }
+  
+  @ViewChild("myInput") _myInput: ElementRef;
 
+  
   options: any;
   dateArray: any[] = [];
   _formGroup: FormGroup;
   // use message to communicate all sorts of error or status to the template
-  infoMessage: string;
+  infoMessage: string = "";
   // array of name and color of current stock for template display
   stockList: any[] = [];
   stockName: any;
-
+  
   interval: any = setInterval(() => {
     this._homeService.emit("get-data", {});
-    console.log("stock lista je:", this.stockList);
   }, 3000);
-
+  
   ngOnInit() {
+ 
+
     let seriesToDisplayArr: any = [];
 
     this._homeService.emit("get-data", {});
@@ -71,8 +78,11 @@ export class AppComponent {
       }
     });
   }
-
+  ngAfterViewInit() {
+    this._myInput.nativeElement.focus();
+  }
   addNew(getStockName: any): void {
+    console.log(this._formGroup);
     let colors = [
       "#058DC7",
       "#50B432",
@@ -83,11 +93,12 @@ export class AppComponent {
       "#FFF263",
       "#6AF9C4"
     ];
-    // clear user input from spaces
+    // convert search to uppercase
+    getStockName.choice = getStockName.choice.toUpperCase();
+    // clear user input from spaces 
     if(/\s/g.test(getStockName.choice)) {
       getStockName.choice = getStockName.choice.replace(/\s/g, "")
     }
-
     this.stockName = getStockName;
     let seriesObj: any = {
       name: "",
@@ -99,9 +110,9 @@ export class AppComponent {
     let finalArray: any[] = [];
 
     // perform max quantity check
-    if (this.stockList.length > 4) {
+    if (this.stockList.length > 7) {
       this.infoMessage =
-        "only 10 stocks allowed at a given time, please delete some";
+        "only 8 stocks allowed at a given time, please delete some";
     
       // check if client user input string is valid, rules checking is performed by form Validators module
     } 
@@ -117,6 +128,7 @@ export class AppComponent {
         this.infoMessage = "Stock already displayed";
       } else {
         this._homeService.doHttpCall(getStockName.choice).subscribe(data => {
+          console.log(data);
           // check if stock exists in the api call
           if (data["Error Message"]) {
             this.infoMessage = "Stock not found";
@@ -148,6 +160,8 @@ export class AppComponent {
             this.dateArray = [];
             this.infoMessage = "";
             this._homeService.emit("get-data", {});
+            this._formGroup.reset("");
+            this._myInput.nativeElement.focus();
           }
         });
       }
