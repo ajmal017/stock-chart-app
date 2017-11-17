@@ -1,6 +1,21 @@
-# Stockapp
+# Stock chart app
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.9.
+Usage:
+
+* View a graph displaying the recent trend lines for each added stock
+* Add new stocks by their symbol name
+* Remove stocks
+* See changes in real-time when any other user adds or removes a stoc
+
+
+### This project is using the following technologies: 
+
+* Angular 4
+* Node ExpressJs
+* Highcharts
+* Web sockets (through socket.io)
+* Mongodb database
+* see package.json for full list of dependencies
 
 ## Server
 
