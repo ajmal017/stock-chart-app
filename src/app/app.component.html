@@ -1,20 +1,52 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container" style="margin:0 auto">
+
+  <div class="row">
+    <!-- chart -->
+    <div id="chart-wrapper">
+        
+        <h4 class="text-center"><i class="fa fa-line-chart fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;Simple stock chart example&nbsp;&nbsp;<i>by: Andrej Stupar</i></h4>
+      <chart id="chart" type="StockChart" [options]="options" ></chart>
+    </div>
+  </div>
+  <!-- view list of stock -->
+  <div class="row">
+    <p class="displayed-stocks-text text-left">Displayed stocks:</p>
+  </div>
+  <div class="row">
+
+    <div *ngIf="stockList.length > 0" class="row">
+      <div *ngFor="let item of stockList" id="stock-list-ul">
+        <span #stock [style.color]="item.color">{{item.name}}</span>
+        <i (click)="deleteOne(stock.innerHTML)" class="fa fa-times"></i>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- form -->
+    <form [formGroup]="_formGroup" (ngSubmit)="addNew(_formGroup.value)" class="form-inline form">
+      <label class="sr-only" for="inlineFormInput"></label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+        <div class="input-group-addon">Add stock</div>
+        <input id="inlineFormInput" type="text" formControlName="choice" class="form-control" required>
+        <input type="submit" class="btn btn-default">
+      </div>
+    </form>
+    <p style="background:red" *ngIf="infoMessage">{{infoMessage}}</p>
+  </div>
+  <div class="row">
+    <p class="text-center max-stock-text">* Maximum of 10 stock</p>
+  </div>
+  <div class="row stock-examples-list-wrapper">
+    <ul>
+      <li>Examples of stocks names from the New York Stock Exchange(NYSE)</li>
+      <li><b>GOOG</b> - <i>Google</i></li>
+      <li><b>FB</b> - <i>Facebook</i></li>
+      <li><b>CSCO</b> - <i>Cisco Systems, Inc.</i></li>
+      <li><b>LMT</b> - <i>Lockeed Martin</i></li>
+    </ul>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+
 
