@@ -1,8 +1,0 @@
-- zrihtaj findindexof, moramo pejstat object za najt ta object v arraju (DONE)
-- postelaj refresh ko se doda nov stock, imamo glavni object array za feed charta, tam šari (DONE)
-- ni asynhrounous, torej loada lahko duplikate predn se postela (DONE --- se zgodi samo ko je api server down, v prod. to bo nemogoce, al dela vse al nic)
-
-- chart se ne obarva ob drawChart .. poglej za dinamicne chartse kako updejtat (DONE ... sort of through random which is not best practice)
-- dodaj filtre, empty user input, duplicates, max 10 stocks .. itd
-
-- implementacija websocketov, ko user doda novo, mora tudi tipu spremenit ... oziroma cekiraj ce je res tako dinamicno 
